@@ -10,6 +10,8 @@ import SwiftUI
 struct CustomLocationView: View {
     @State private var viewModel: CustomLocationViewModel
     @FocusState private var isFocused: Bool
+    @Environment(\.openURL) private var openURL
+    @State private var showsWikipediaAlert = false
 
     init(viewModel: CustomLocationViewModel) {
         _viewModel = State(initialValue: viewModel)
@@ -25,6 +27,7 @@ struct CustomLocationView: View {
             .dismissKeyboard(focus: $isFocused)
             .navigationTitle(L10n.Common.customLocationTitle)
         }
+        .wikipediaNotInstalledAlert(isPresented: $showsWikipediaAlert)
     }
 }
 
@@ -76,9 +79,18 @@ private extension CustomLocationView {
 
 private extension CustomLocationView {
     func openWikipedia() {
-        guard let coordinate = viewModel.coordinate else { return }
-
-        print(coordinate.latitude, coordinate.longitude)
+        guard let coordinate = viewModel.coordinate,
+              let url = WikipediaURLBuilder.makeURL(
+                  latitude: coordinate.latitude,
+                  longitude: coordinate.longitude
+              ) else {
+            return
+        }
+        openURL(url) { accepted in
+            if accepted.not {
+                showsWikipediaAlert = true
+            }
+        }
     }
 }
 

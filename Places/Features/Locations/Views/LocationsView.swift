@@ -9,6 +9,8 @@ import SwiftUI
 
 struct LocationsView: View {
     @State private var viewModel: LocationsViewModel
+    @Environment(\.openURL) private var openURL
+    @State private var showsWikipediaAlert = false
 
     init(viewModel: LocationsViewModel) {
         _viewModel = State(initialValue: viewModel)
@@ -22,6 +24,7 @@ struct LocationsView: View {
         .task {
             await viewModel.loadLocations()
         }
+        .wikipediaNotInstalledAlert(isPresented: $showsWikipediaAlert)
     }
 }
 
@@ -55,6 +58,17 @@ private extension LocationsView {
 
 private extension LocationsView {
     func openWikipedia(for location: PlaceLocation) {
+        guard let url = WikipediaURLBuilder.makeURL(
+            latitude: location.latitude,
+            longitude: location.longitude
+        ) else {
+            return
+        }
+        openURL(url) { accepted in
+            if accepted.not {
+                showsWikipediaAlert = true
+            }
+        }
     }
 }
 

@@ -31,3 +31,9 @@
 "invalid.response" = "De server gaf een ongeldige reactie. Probeer het opnieuw.";
 "unacceptable.status.code" = "De server gaf een onverwacht resultaat. Probeer het later opnieuw.";
 "decoding.failed" = "We konden de gegevens niet verwerken. Probeer het opnieuw.";
+
+// MARK: - Wikipedia Alert
+
+"wikipedia.not.installed.title" = "Wikipedia is not installed";
+"wikipedia.not.installed.message" = "Please install the Wikipedia app to open nearby places.";
+"common.ok" = "OK";

@@ -64,4 +64,10 @@ enum L10n {
         nonisolated static let unacceptableStatusCode = String(localized: "unacceptable.status.code")
         nonisolated static let decodingFailed = String(localized: "decoding.failed")
     }
+    
+    enum Wikipedia {
+        static let notInstalledTitle = String(localized: "wikipedia.not.installed.title")
+        static let notInstalledMessage = String(localized: "wikipedia.not.installed.message")
+        static let okButton = String(localized: "common.ok")
+    }
 }

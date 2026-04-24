@@ -33,6 +33,7 @@ struct PrimaryButton<Label: View>: View {
                 )
                 .frame(maxWidth: .infinity)
         }
+        .buttonStyle(.plain)
         .disabled(isEnabled.not)
     }
 }

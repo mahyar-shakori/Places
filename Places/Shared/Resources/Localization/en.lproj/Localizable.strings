@@ -31,3 +31,9 @@
 "invalid.response" = "The server returned an invalid response. Please try again.";
 "unacceptable.status.code" = "The server returned an unexpected result. Please try again later.";
 "decoding.failed" = "We couldn’t process the data. Please try again.";
+
+// MARK: - Wikipedia Alert
+
+"wikipedia.not.installed.title" = "Wikipedia is not installed";
+"wikipedia.not.installed.message" = "Please install the Wikipedia app to open nearby places.";
+"common.ok" = "OK";
