@@ -6,9 +6,28 @@
   
 */
 
+// MARK: - Common
+
+"places.title" = "Plaatsen";
+"custom.location.title" = "Aangepaste locatie";
+
+// MARK: - Locations
+
+"locations.unknown.title" = "Onbekende locatie";
+"locations.error.title" = "Er is iets misgegaan";
+
+// MARK: - Custom Location
+
+"custom.enter.coordinates" = "Voer coördinaten in";
+"custom.latitude.placeholder" = "Breedtegraad";
+"custom.longitude.placeholder" = "Lengtegraad";
+"custom.open.wikipedia" = "Openen in Wikipedia";
+"custom.how.it.works.title" = "Hoe het werkt";
+"custom.description" = "Voer geldige coördinaten in (breedtegraad -90 tot 90, lengtegraad -180 tot 180) en tik op de knop om Wikipedia direct op die locatie te openen.";
+
 // MARK: - Network Errors
 
 "invalid.url" = "Het adres van de aanvraag is ongeldig. Probeer het opnieuw.";
-"invalid.response" = "De server gaf een ongeldig antwoord. Probeer het opnieuw.";
+"invalid.response" = "De server gaf een ongeldige reactie. Probeer het opnieuw.";
 "unacceptable.status.code" = "De server gaf een onverwacht resultaat. Probeer het later opnieuw.";
 "decoding.failed" = "We konden de gegevens niet verwerken. Probeer het opnieuw.";

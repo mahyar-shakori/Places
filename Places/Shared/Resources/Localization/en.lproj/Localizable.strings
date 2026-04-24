@@ -6,6 +6,25 @@
   
 */
 
+// MARK: - Common
+
+"places.title" = "Places";
+"custom.location.title" = "Custom Location";
+
+// MARK: - Locations
+
+"locations.unknown.title" = "Unknown location";
+"locations.error.title" = "Something went wrong";
+
+// MARK: - Custom Location
+
+"custom.enter.coordinates" = "Enter coordinates";
+"custom.latitude.placeholder" = "Latitude";
+"custom.longitude.placeholder" = "Longitude";
+"custom.open.wikipedia" = "Open in Wikipedia";
+"custom.how.it.works.title" = "How it works";
+"custom.description" = "Enter valid coordinates (latitude -90 to 90, longitude -180 to 180), then tap the button to open Wikipedia directly at that location.";
+
 // MARK: - Network Errors
 
 "invalid.url" = "The request address is invalid. Please try again.";

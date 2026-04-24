@@ -13,10 +13,10 @@ struct L10nTests {
     @MainActor
     @Test
     func networkErrorStringsAreResolved() {
-        #expect(!L10n.NetworkError.invalidURL.isEmpty)
-        #expect(!L10n.NetworkError.invalidResponse.isEmpty)
-        #expect(!L10n.NetworkError.unacceptableStatusCode.isEmpty)
-        #expect(!L10n.NetworkError.decodingFailed.isEmpty)
+        #expect(L10n.NetworkError.invalidURL.isNotEmpty)
+        #expect(L10n.NetworkError.invalidResponse.isNotEmpty)
+        #expect(L10n.NetworkError.unacceptableStatusCode.isNotEmpty)
+        #expect(L10n.NetworkError.decodingFailed.isNotEmpty)
 
         #expect(L10n.NetworkError.invalidURL != "invalid.url")
         #expect(L10n.NetworkError.invalidResponse != "invalid.response")
