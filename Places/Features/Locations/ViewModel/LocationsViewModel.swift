@@ -10,16 +10,16 @@ import Observation
 
 @Observable
 final class LocationsViewModel {
-    private let locationsService: any LocationsServicing
+    private let apiService: APIFetching
 
     var locations: [PlaceLocation] = []
     var isLoading = false
     var errorMessage: String?
-
-    init(locationsService: LocationsServicing) {
-        self.locationsService = locationsService
+    
+    init(apiService: APIFetching) {
+        self.apiService = apiService
     }
-
+    
     func loadLocations() async {
         isLoading = true
         errorMessage = nil
@@ -29,7 +29,11 @@ final class LocationsViewModel {
         }
 
         do {
-            locations = try await locationsService.fetchLocations()
+            let response = try await apiService.fetchData(
+                from: LocationsEndpoint.locations,
+                as: LocationsResponse.self
+            )
+            locations = response.locations
         } catch let error as LocalizedError {
             errorMessage = error.errorDescription
         } catch {

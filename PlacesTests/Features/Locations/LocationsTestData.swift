@@ -7,7 +7,7 @@
 
 @testable import Places
 
-enum LocationsTestData {
+enum LocationsTestData: @unchecked Sendable {
     static let amsterdam = PlaceLocation(
         name: "Amsterdam",
         latitude: 52.3547498,
