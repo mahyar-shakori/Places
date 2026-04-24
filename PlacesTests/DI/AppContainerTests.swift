@@ -31,4 +31,21 @@ struct AppContainerTests {
         #expect(container.apiService is MockAPIService<LocationsService.Response>)
         #expect(locations == LocationsTestData.response.locations)
     }
+
+    @MainActor
+    @Test
+    func makeLocationsViewModelCreatesViewModelWithInjectedDependencies() async {
+        let mockAPIService = MockAPIService<LocationsService.Response>(
+            result: .success(LocationsTestData.response)
+        )
+
+        let container = AppContainer(apiService: mockAPIService)
+        let viewModel = container.makeLocationsViewModel()
+
+        await viewModel.loadLocations()
+
+        #expect(viewModel.locations == LocationsTestData.response.locations)
+        #expect(viewModel.errorMessage == nil)
+        #expect(viewModel.isLoading == false)
+    }
 }

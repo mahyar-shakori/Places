@@ -13,4 +13,9 @@ nonisolated final class AppContainer: @unchecked Sendable {
         self.apiService = apiService
         self.locationsService = LocationsService(apiService: apiService)
     }
+    
+    @MainActor
+    func makeLocationsViewModel() -> LocationsViewModel {
+        LocationsViewModel(locationsService: locationsService)
+    }
 }
