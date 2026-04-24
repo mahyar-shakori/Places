@@ -12,3 +12,7 @@ extension Collection {
         !isEmpty
     }
 }
+
+extension Bool {
+    var not: Bool { !self }
+}
