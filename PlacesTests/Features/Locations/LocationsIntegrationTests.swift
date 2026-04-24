@@ -12,12 +12,12 @@ struct LocationsIntegrationTests {
 
     @Test(.disabled("Relies on external network"))
     func fetchLocationsFromRemoteAPI() async throws {
-        let service = LocationsService(
+        let service = await LocationsService(
             apiService: APIService()
         )
 
         let locations = try await service.fetchLocations()
 
-        #expect(!locations.isEmpty)
+        #expect(locations.isNotEmpty)
     }
 }

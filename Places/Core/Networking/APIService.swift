@@ -7,7 +7,7 @@
 
 import Foundation
 
-nonisolated final class APIService: APIFetching {
+final class APIService: APIFetching {
     private let urlSession: URLSession
     private let decoder: JSONDecoder
 
@@ -19,7 +19,10 @@ nonisolated final class APIService: APIFetching {
         self.decoder = decoder
     }
 
-    func fetchData<T: Decodable>(from endpoint: Endpoint) async throws -> T {
+    func fetchData<T: Decodable>(
+        from endpoint: Endpoint,
+        as type: T.Type
+    ) async throws -> T {
         let request = try endpoint.asURLRequest()
         let (data, response) = try await urlSession.data(for: request)
 

@@ -5,17 +5,18 @@
 //  Created by Mahyar on 24/04/2026.
 //
 
-nonisolated final class AppContainer: @unchecked Sendable {
+final class AppContainer: Sendable {
     let apiService: APIFetching
-    let locationsService: LocationsServicing
 
     init(apiService: APIFetching = APIService()) {
         self.apiService = apiService
-        self.locationsService = LocationsService(apiService: apiService)
     }
-    
-    @MainActor
+
     func makeLocationsViewModel() -> LocationsViewModel {
-        LocationsViewModel(locationsService: locationsService)
+        LocationsViewModel(apiService: apiService)
+    }
+
+    func makeCustomLocationViewModel() -> CustomLocationViewModel {
+        CustomLocationViewModel()
     }
 }

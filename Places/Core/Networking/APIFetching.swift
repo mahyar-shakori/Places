@@ -5,6 +5,9 @@
 //  Created by Mahyar on 24/04/2026.
 //
 
-protocol APIFetching: Sendable {
-    func fetchData<T: Decodable>(from endpoint: Endpoint) async throws -> T
+protocol APIFetching {
+    func fetchData<T: Decodable>(
+        from endpoint: Endpoint,
+        as type: T.Type
+    ) async throws -> T
 }

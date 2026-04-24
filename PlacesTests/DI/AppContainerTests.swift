@@ -8,7 +8,8 @@
 import Testing
 @testable import Places
 
-struct AppContainerTests {
+@MainActor
+struct AppContainerTests: @unchecked Sendable {
 
     @Test
     func appContainerCreatesDefaultDependencies() {

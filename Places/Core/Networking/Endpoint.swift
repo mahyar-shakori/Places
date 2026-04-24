@@ -8,14 +8,14 @@
 import Foundation
 
 protocol Endpoint: Sendable {
-    nonisolated var url: URL? { get }
-    nonisolated var method: HTTPMethod { get }
+    var url: URL? { get }
+    var method: HTTPMethod { get }
 
-    nonisolated func asURLRequest() throws -> URLRequest
+    func asURLRequest() throws -> URLRequest
 }
 
 extension Endpoint {
-    nonisolated func asURLRequest() throws -> URLRequest {
+    func asURLRequest() throws -> URLRequest {
         guard let url else {
             throw NetworkError.invalidURL
         }

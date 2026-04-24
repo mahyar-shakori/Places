@@ -38,21 +38,21 @@ struct EndpointTests {
 }
 
 private struct ValidEndpoint: Endpoint {
-    nonisolated var url: URL? {
+    var url: URL? {
         URL(string: "https://example.com/test")
     }
 
-    nonisolated var method: HTTPMethod {
+    var method: HTTPMethod {
         .get
     }
 }
 
 private struct InvalidEndpoint: Endpoint {
-    nonisolated var url: URL? {
+    var url: URL? {
         nil
     }
 
-    nonisolated var method: HTTPMethod {
+    var method: HTTPMethod {
         .get
     }
 }
