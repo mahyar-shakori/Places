@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct PlacesApp: App {
+    private let container = AppContainer()
+
     var body: some Scene {
         WindowGroup {
-            LocationsView()
+            AppRootView(container: container)
         }
     }
 }
