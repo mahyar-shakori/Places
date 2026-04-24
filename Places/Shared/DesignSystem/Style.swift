@@ -1,5 +1,5 @@
 //
-//  AppUI.swift
+//  Style.swift
 //  Places
 //
 //  Created by Mahyar on 24/04/2026.
@@ -7,26 +7,22 @@
 
 import SwiftUI
 
-enum AppUI {
+enum Style {
     enum Spacing {
         static let xSmall: CGFloat = 2
         static let small: CGFloat = 8
         static let medium: CGFloat = 12
         static let large: CGFloat = 16
     }
-
-    enum Size {
-        static let rowIcon: CGFloat = 32
-    }
-
+    
     enum CornerRadius {
         static let medium: CGFloat = 12
         static let large: CGFloat = 24
     }
 
     enum Opacity {
-        static let disabled: CGFloat = 0.35
-        static let border: CGFloat = 0.35
+        static let disabledContent: CGFloat = 0.35
+        static let subtleBorder: CGFloat = 0.35
         static let iconBackground: CGFloat = 0.12
     }
 
@@ -43,13 +39,10 @@ enum AppUI {
         static let cardBackground = SwiftUI.Color(.systemBackground)
 
         static let primaryAction = SwiftUI.Color.blue
-        static let disabledAction = SwiftUI.Color.gray.opacity(AppUI.Opacity.disabled)
+        static let disabledAction = SwiftUI.Color.gray.opacity(Style.Opacity.disabledContent)
 
         static let fieldBackground = SwiftUI.Color(.tertiarySystemBackground)
-        static let fieldBorder = SwiftUI.Color.gray.opacity(AppUI.Opacity.border)
-
-        static let iconForeground = SwiftUI.Color.blue
-        static let iconBackground = SwiftUI.Color.blue.opacity(AppUI.Opacity.iconBackground)
+        static let fieldBorder = SwiftUI.Color.gray.opacity(Style.Opacity.subtleBorder)
     }
 
     enum Font {
@@ -63,7 +56,6 @@ enum AppUI {
     }
 
     enum Icon {
-        static let location = "mappin.circle.fill"
         static let placesTab = "location.circle"
         static let customTab = "plus.square"
         static let chevron = "chevron.right"

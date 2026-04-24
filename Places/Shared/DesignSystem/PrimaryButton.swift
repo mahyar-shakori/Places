@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AppPrimaryButton<Label: View>: View {
+struct PrimaryButton<Label: View>: View {
     let isEnabled: Bool
     let action: () -> Void
     let label: () -> Label
