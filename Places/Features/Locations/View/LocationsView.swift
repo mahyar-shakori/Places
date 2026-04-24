@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  LocationsView.swift
 //  Places
 //
 //  Created by Mahyar on 23/04/2026.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct LocationsView: View {
     var body: some View {
         VStack {
             Image(systemName: "globe")
@@ -20,5 +20,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    LocationsView()
 }
