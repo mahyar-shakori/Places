@@ -1,0 +1,14 @@
+/* 
+  Localizable.strings
+  Places
+
+  Created by Mahyar on 24/04/2026.
+  
+*/
+
+// MARK: - Network Errors
+
+"invalid.url" = "Het adres van de aanvraag is ongeldig. Probeer het opnieuw.";
+"invalid.response" = "De server gaf een ongeldig antwoord. Probeer het opnieuw.";
+"unacceptable.status.code" = "De server gaf een onverwacht resultaat. Probeer het later opnieuw.";
+"decoding.failed" = "We konden de gegevens niet verwerken. Probeer het opnieuw.";

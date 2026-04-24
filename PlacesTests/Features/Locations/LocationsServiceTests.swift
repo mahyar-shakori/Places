@@ -22,7 +22,7 @@ struct LocationsServiceTests {
 
         #expect(locations.count == 2)
         #expect(locations.first == LocationsTestData.amsterdam)
-        #expect(locations.last?.displayName == "Unknown location")
+        #expect(locations.last?.name == nil)
     }
 
     @Test

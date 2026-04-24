@@ -1,0 +1,14 @@
+/* 
+  Localizable.strings
+  Places
+
+  Created by Mahyar on 24/04/2026.
+  
+*/
+
+// MARK: - Network Errors
+
+"invalid.url" = "The request address is invalid. Please try again.";
+"invalid.response" = "The server returned an invalid response. Please try again.";
+"unacceptable.status.code" = "The server returned an unexpected result. Please try again later.";
+"decoding.failed" = "We couldn’t process the data. Please try again.";
