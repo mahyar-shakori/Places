@@ -70,4 +70,21 @@ enum L10n {
         static let notInstalledMessage = String(localized: "wikipedia.not.installed.message")
         static let okButton = String(localized: "common.ok")
     }
+    
+    enum Accessibility {
+        static let north = String(localized: "accessibility.north")
+        static let south = String(localized: "accessibility.south")
+        static let east = String(localized: "accessibility.east")
+        static let west = String(localized: "accessibility.west")
+        
+        static let locationLabel = String(localized: "accessibility.location.label")
+        static let latitudeField = String(localized: "accessibility.latitude.field")
+        static let latitudeHint = String(localized: "accessibility.latitude.hint")
+        static let longitudeField = String(localized: "accessibility.longitude.field")
+        static let longitudeHint = String(localized: "accessibility.longitude.hint")
+        
+        static let openWikipediaButton = String(localized: "accessibility.open.wikipedia.button")
+        static let openWikipediaHint = String(localized: "accessibility.open.wikipedia.hint")
+        static let openWikipediaRequirementHint = String(localized: "accessibility.open.wikipedia.requirement.hint")
+    }
 }

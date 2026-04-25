@@ -12,6 +12,12 @@ struct CustomLocationView: View {
     @FocusState private var isFocused: Bool
     @Environment(\.openURL) private var openURL
     @State private var showsWikipediaAlert = false
+    
+    private var openWikipediaButtonAccessibilityHint: String {
+        viewModel.isValidCoordinate
+        ? L10n.Accessibility.openWikipediaHint
+        : L10n.Accessibility.openWikipediaRequirementHint
+    }
 
     init(viewModel: CustomLocationViewModel) {
         _viewModel = State(initialValue: viewModel)
@@ -42,6 +48,9 @@ private extension CustomLocationView {
             )
             .keyboardType(.decimalPad)
             .focused($isFocused)
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel(L10n.Accessibility.latitudeField)
+            .accessibilityHint(L10n.Accessibility.latitudeHint)
 
             TextField(
                 L10n.CustomLocation.longitudePlaceholder,
@@ -49,6 +58,9 @@ private extension CustomLocationView {
             )
             .keyboardType(.decimalPad)
             .focused($isFocused)
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel(L10n.Accessibility.longitudeField)
+            .accessibilityHint(L10n.Accessibility.longitudeHint)
         }
     }
     
@@ -63,6 +75,8 @@ private extension CustomLocationView {
                     systemImage: Style.Icon.globe
                 )
             }
+            .accessibilityLabel(L10n.Accessibility.openWikipediaButton)
+            .accessibilityHint(openWikipediaButtonAccessibilityHint)
         }
     }
 

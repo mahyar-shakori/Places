@@ -13,6 +13,14 @@ struct LocationRowView: View {
     private var coordinatesText: String {
         "\(location.latitude), \(location.longitude)"
     }
+    
+    private var accessibilityTitle: String {
+        CoordinateAccessibilityFormatter.label(
+            name: location.name ?? L10n.Locations.unknownTitle,
+            latitude: location.latitude,
+            longitude: location.longitude
+        )
+    }
 
     var body: some View {
         HStack(spacing: Style.Spacing.medium) {
@@ -21,7 +29,10 @@ struct LocationRowView: View {
             chevron
         }
         .padding(.vertical, Style.Spacing.xSmall)
-        .accessibilityElement(children: .combine)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(accessibilityTitle)
+        .accessibilityHint(L10n.Accessibility.openWikipediaHint)
+        .accessibilityAddTraits(.isButton)
     }
 }
 
@@ -40,6 +51,7 @@ private extension LocationRowView {
         Text(location.name ?? L10n.Locations.unknownTitle)
             .font(Style.Font.rowTitle)
             .foregroundStyle(.primary)
+            .lineLimit(nil)
     }
 
     var subtitle: some View {
@@ -47,6 +59,7 @@ private extension LocationRowView {
             .font(Style.Font.rowSubtitle)
             .foregroundStyle(.secondary)
             .monospacedDigit()
+            .lineLimit(nil)
     }
 
     var chevron: some View {

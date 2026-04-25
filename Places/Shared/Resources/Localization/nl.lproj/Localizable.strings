@@ -37,3 +37,18 @@
 "wikipedia.not.installed.title" = "Wikipedia is not installed";
 "wikipedia.not.installed.message" = "Please install the Wikipedia app to open nearby places.";
 "common.ok" = "OK";
+
+// MARK: - Accessibility
+
+"accessibility.north" = "noord";
+"accessibility.south" = "zuid";
+"accessibility.east" = "oost";
+"accessibility.west" = "west";
+"accessibility.location.label" = "%@. Breedtegraad %.2f %@. Lengtegraad %.2f %@.";
+"accessibility.latitude.field" = "Breedtegraad";
+"accessibility.latitude.hint" = "Voer een waarde in tussen min 90 en 90.";
+"accessibility.longitude.field" = "Lengtegraad";
+"accessibility.longitude.hint" = "Voer een waarde in tussen min 180 en 180.";
+"accessibility.open.wikipedia.button" = "Openen in Wikipedia";
+"accessibility.open.wikipedia.hint" = "Tik om deze locatie in Wikipedia te bekijken.";
+"accessibility.open.wikipedia.requirement.hint" = "Voer geldige waarden voor breedtegraad en lengtegraad in om deze knop in te schakelen.";

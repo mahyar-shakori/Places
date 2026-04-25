@@ -37,3 +37,18 @@
 "wikipedia.not.installed.title" = "Wikipedia is not installed";
 "wikipedia.not.installed.message" = "Please install the Wikipedia app to open nearby places.";
 "common.ok" = "OK";
+
+// MARK: - Accessibility
+
+"accessibility.north" = "north";
+"accessibility.south" = "south";
+"accessibility.east" = "east";
+"accessibility.west" = "west";
+"accessibility.location.label" = "%@. Latitude %.2f %@. Longitude %.2f %@.";
+"accessibility.latitude.field" = "Latitude input field";
+"accessibility.latitude.hint" = "Enter a value between minus 90 and 90.";
+"accessibility.longitude.field" = "Longitude input field";
+"accessibility.longitude.hint" = "Enter a value between minus 180 and 180.";
+"accessibility.open.wikipedia.button" = "Open in Wikipedia";
+"accessibility.open.wikipedia.hint" = "Tap to view this location in Wikipedia.";
+"accessibility.open.wikipedia.requirement.hint" = "Enter valid latitude and longitude values to enable this button.";
