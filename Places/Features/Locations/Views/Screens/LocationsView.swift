@@ -19,12 +19,12 @@ struct LocationsView: View {
     var body: some View {
         NavigationStack {
             content
-                .navigationTitle(L10n.Common.placesTitle)
+                .navigationTitle(Localization.Common.placesTitle)
         }
         .task {
             await viewModel.loadLocations()
         }
-        .wikipediaNotInstalledAlert(isPresented: $showsWikipediaAlert)
+        .basicAlert(isPresented: $showsWikipediaAlert)
     }
 }
 
@@ -45,7 +45,7 @@ private extension LocationsView {
     var locationsList: some View {
         List(viewModel.locations) { location in
             Button {
-                openWikipedia(for: location)
+                openWikipedia(url: location.wikipediaURL)
             } label: {
                 LocationRowView(location: location)
             }
@@ -57,17 +57,11 @@ private extension LocationsView {
 // MARK: - Actions
 
 private extension LocationsView {
-    func openWikipedia(for location: PlaceLocation) {
-        guard let url = WikipediaURLBuilder.makeURL(
-            latitude: location.latitude,
-            longitude: location.longitude
-        ) else {
-            return
-        }
+    func openWikipedia(url: URL?) {
+        guard let url else { return }
+
         openURL(url) { accepted in
-            if accepted.not {
-                showsWikipediaAlert = true
-            }
+            showsWikipediaAlert = accepted.not
         }
     }
 }

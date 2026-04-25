@@ -1,5 +1,5 @@
 //
-//  L10n.swift
+//  Localization.swift
 //  Places
 //
 //  Created by Mahyar on 24/04/2026.
@@ -7,10 +7,11 @@
 
 import Foundation
 
-enum L10n {
+enum Localization {
     enum Common {
         static let placesTitle = String(localized: "places.title")
         static let customLocationTitle = String(localized: "custom.location.title")
+        static let okButton = String(localized: "common.ok")
     }
 
     enum Locations {
@@ -37,7 +38,6 @@ enum L10n {
     enum Wikipedia {
         static let notInstalledTitle = String(localized: "wikipedia.not.installed.title")
         static let notInstalledMessage = String(localized: "wikipedia.not.installed.message")
-        static let okButton = String(localized: "common.ok")
     }
     
     enum Accessibility {

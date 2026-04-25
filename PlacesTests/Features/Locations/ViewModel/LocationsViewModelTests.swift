@@ -16,7 +16,6 @@ struct LocationsViewModelTests {
         let apiService = MockAPIService<LocationsResponse>(
             result: .success(LocationsTestData.response)
         )
-
         let viewModel = LocationsViewModel(apiService: apiService)
 
         await viewModel.loadLocations()
@@ -31,12 +30,11 @@ struct LocationsViewModelTests {
         let apiService = MockAPIService<LocationsResponse>(
             result: .failure(.invalidResponse)
         )
-
         let viewModel = LocationsViewModel(apiService: apiService)
 
         await viewModel.loadLocations()
 
-        #expect(viewModel.locations.isEmpty)
+        #expect(viewModel.locations.isEmpty == true)
         #expect(viewModel.errorMessage == NetworkError.invalidResponse.errorDescription)
         #expect(viewModel.isLoading == false)
     }
@@ -46,7 +44,6 @@ struct LocationsViewModelTests {
         let apiService = MockAPIService<LocationsResponse>(
             result: .success(LocationsTestData.response)
         )
-
         let viewModel = LocationsViewModel(apiService: apiService)
         viewModel.errorMessage = "Previous error"
 

@@ -1,5 +1,5 @@
 //
-//  Collection+Helpers.swift
+//  Types+Helpers.swift
 //  Places
 //
 //  Created by Mahyar on 24/04/2026.

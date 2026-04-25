@@ -9,16 +9,26 @@ import Testing
 @testable import Places
 
 struct TypesHelpersTests {
-    
-    @Test
-    func isNotEmptyReturnsCorrectValue() {
-        #expect([1, 2, 3].isNotEmpty == true)
-        #expect([Int]().isNotEmpty == false)
+
+    @Test(arguments: [
+        ([1, 2, 3], true),
+        ([Int](), false)
+    ])
+    func isNotEmptyReturnsCorrectValue(
+        array: [Int],
+        expected: Bool
+    ) {
+        #expect(array.isNotEmpty == expected)
     }
-    
-    @Test
-    func boolNotReturnsOppositeValue() {
-        #expect(true.not == false)
-        #expect(false.not == true)
+
+    @Test(arguments: [
+        (true, false),
+        (false, true)
+    ])
+    func boolNotReturnsOppositeValue(
+        input: Bool,
+        expected: Bool
+    ) {
+        #expect(input.not == expected)
     }
 }

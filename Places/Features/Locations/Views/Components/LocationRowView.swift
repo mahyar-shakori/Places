@@ -11,12 +11,7 @@ struct LocationRowView: View {
     let location: PlaceLocation
     
     private var coordinatesText: String {
-        "\(location.latitude), \(location.longitude)"
-    }
-    
-    private var accessibilityTitle: String {
-        CoordinateAccessibilityFormatter.label(
-            name: location.name ?? L10n.Locations.unknownTitle,
+        CoordinateDisplayFormatter.text(
             latitude: location.latitude,
             longitude: location.longitude
         )
@@ -30,8 +25,8 @@ struct LocationRowView: View {
         }
         .padding(.vertical, Style.Spacing.xSmall)
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(accessibilityTitle)
-        .accessibilityHint(L10n.Accessibility.openWikipediaHint)
+        .accessibilityLabel(location.accessibilityTitle)
+        .accessibilityHint(Localization.Accessibility.openWikipediaHint)
         .accessibilityAddTraits(.isButton)
     }
 }
@@ -48,15 +43,15 @@ private extension LocationRowView {
     }
 
     var title: some View {
-        Text(location.name ?? L10n.Locations.unknownTitle)
-            .font(Style.Font.rowTitle)
+        Text(location.name ?? Localization.Locations.unknownTitle)
+            .font(Style.Fonts.rowTitle)
             .foregroundStyle(.primary)
             .lineLimit(nil)
     }
 
     var subtitle: some View {
         Text(coordinatesText)
-            .font(Style.Font.rowSubtitle)
+            .font(Style.Fonts.rowSubtitle)
             .foregroundStyle(.secondary)
             .monospacedDigit()
             .lineLimit(nil)
@@ -64,18 +59,14 @@ private extension LocationRowView {
 
     var chevron: some View {
         Image(systemName: Style.Icon.chevron)
-            .font(Style.Font.rowSubtitle)
+            .font(Style.Fonts.rowSubtitle)
             .foregroundStyle(.tertiary)
     }
 }
 
 #Preview {
     LocationRowView(
-        location: PlaceLocation(
-            name: "Amsterdam",
-            latitude: 52.3547498,
-            longitude: 4.8339215
-        )
+        location: PlaceLocation.preview
     )
     .padding()
 }

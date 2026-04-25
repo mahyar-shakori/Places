@@ -16,15 +16,26 @@ final class CustomLocationViewModel {
     var isValidCoordinate: Bool {
         coordinate != nil
     }
-    
-    var coordinate: (latitude: Double, longitude: Double)? {
-        guard let latitudeValue = Double(latitude),
-              let longitudeValue = Double(longitude),
-              (-90...90).contains(latitudeValue),
-              (-180...180).contains(longitudeValue)
-        else {
-            return nil
-        }
-        return (latitudeValue, longitudeValue)
+
+    var openWikipediaURL: URL? {
+        guard let coordinate else { return nil }
+
+        return WikipediaURLBuilder.makeURL(
+            latitude: coordinate.latitude,
+            longitude: coordinate.longitude
+        )
+    }
+
+    var openWikipediaButtonAccessibilityHint: String {
+        isValidCoordinate
+        ? Localization.Accessibility.openWikipediaHint
+        : Localization.Accessibility.openWikipediaRequirementHint
+    }
+
+    private var coordinate: (latitude: Double, longitude: Double)? {
+        CoordinateValidator.coordinate(
+            latitude: latitude,
+            longitude: longitude
+        )
     }
 }

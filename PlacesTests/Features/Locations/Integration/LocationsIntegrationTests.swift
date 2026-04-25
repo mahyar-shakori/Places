@@ -15,10 +15,10 @@ struct LocationsIntegrationTests {
     func fetchLocationsFromRemoteAPI() async throws {
         let apiService = APIService()
 
-        let response = try await apiService.fetchData(
-            from: LocationsEndpoint.locations,
-            as: LocationsResponse.self
+        let response: LocationsResponse = try await apiService.fetchData(
+            from: LocationsEndpoint.locations
         )
+
         #expect(response.locations.isNotEmpty)
     }
 }

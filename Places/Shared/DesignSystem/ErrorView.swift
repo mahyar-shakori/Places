@@ -1,28 +1,25 @@
 //
-//  StateView.swift
+//  ErrorView.swift
 //  Places
 //
-//  Created by Mahyar on 24/04/2026.
+//  Created by Mahyar on 25/04/2026.
 //
 
 import SwiftUI
-
-struct LoadingView: View {
-    var body: some View {
-        ProgressView()
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-    }
-}
 
 struct ErrorView: View {
     let message: String
 
     var body: some View {
         ContentUnavailableView(
-            L10n.Locations.errorTitle,
+            Localization.Locations.errorTitle,
             systemImage: Style.Icon.error,
             description: Text(message)
         )
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
+}
+
+#Preview("Error") {
+    ErrorView(message: "Something went wrong. Please try again.")
 }

@@ -1,5 +1,5 @@
 //
-//  EndpointTests.swift
+//  NetworkEndpointTests.swift
 //  Places
 //
 //  Created by Mahyar on 24/04/2026.
@@ -10,10 +10,10 @@ import Testing
 @testable import Places
 
 @MainActor
-struct EndpointTests {
+struct NetworkEndpointTests {
 
     @Test
-    func asURLRequestThrowsInvalidURLWhenEndpointURLIsNil() {
+    func asURLRequestThrowsInvalidURLWhenBaseURLIsNil() {
         let endpoint = InvalidEndpoint()
 
         do {
@@ -38,9 +38,13 @@ struct EndpointTests {
     }
 }
 
-private struct ValidEndpoint: Endpoint {
-    var url: URL? {
-        URL(string: "https://example.com/test")
+private struct ValidEndpoint: NetworkEndpoint {
+    var baseURL: URL? {
+        URL(string: "https://example.com")
+    }
+
+    var path: String {
+        "test"
     }
 
     var method: HTTPMethod {
@@ -48,9 +52,13 @@ private struct ValidEndpoint: Endpoint {
     }
 }
 
-private struct InvalidEndpoint: Endpoint {
-    var url: URL? {
+private struct InvalidEndpoint: NetworkEndpoint {
+    var baseURL: URL? {
         nil
+    }
+
+    var path: String {
+        "test"
     }
 
     var method: HTTPMethod {

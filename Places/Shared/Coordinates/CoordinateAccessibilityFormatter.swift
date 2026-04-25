@@ -14,15 +14,15 @@ enum CoordinateAccessibilityFormatter {
         longitude: Double
     ) -> String {
         let latitudeDirection = latitude >= 0
-            ? L10n.Accessibility.north
-            : L10n.Accessibility.south
+            ? Localization.Accessibility.north
+            : Localization.Accessibility.south
 
         let longitudeDirection = longitude >= 0
-            ? L10n.Accessibility.east
-            : L10n.Accessibility.west
+            ? Localization.Accessibility.east
+            : Localization.Accessibility.west
 
         return String(
-            format: L10n.Accessibility.locationLabel,
+            format: Localization.Accessibility.locationLabel,
             name,
             abs(latitude),
             latitudeDirection,

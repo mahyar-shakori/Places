@@ -25,15 +25,34 @@ struct PrimaryButton<Label: View>: View {
     var body: some View {
         Button(action: action) {
             label()
-                .font(Style.Font.buttonTitle)
+                .font(Style.Fonts.buttonTitle)
                 .foregroundStyle(
                     isEnabled
-                    ? Style.Color.primaryAction
-                    : Style.Color.disabledAction
+                    ? Style.Colors.primaryAction
+                    : Style.Colors.disabledAction
                 )
                 .frame(maxWidth: .infinity)
         }
         .buttonStyle(.plain)
         .disabled(isEnabled.not)
     }
+}
+
+#Preview {
+    VStack(spacing: 16) {
+        PrimaryButton(
+            isEnabled: true,
+            action: {}
+        ) {
+            Label("Enabled Button", systemImage: "checkmark.circle")
+        }
+
+        PrimaryButton(
+            isEnabled: false,
+            action: {}
+        ) {
+            Label("Disabled Button", systemImage: "xmark.circle")
+        }
+    }
+    .padding()
 }

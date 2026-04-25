@@ -10,12 +10,17 @@ import Testing
 
 struct HTTPMethodTests {
 
-    @Test
-    func rawValuesAreCorrect() {
-        #expect(HTTPMethod.get.rawValue == "GET")
-        #expect(HTTPMethod.post.rawValue == "POST")
-        #expect(HTTPMethod.put.rawValue == "PUT")
-        #expect(HTTPMethod.delete.rawValue == "DELETE")
-        #expect(HTTPMethod.patch.rawValue == "PATCH")
+    @Test(arguments: [
+        (HTTPMethod.get, "GET"),
+        (HTTPMethod.post, "POST"),
+        (HTTPMethod.put, "PUT"),
+        (HTTPMethod.delete, "DELETE"),
+        (HTTPMethod.patch, "PATCH")
+    ])
+    func rawValuesAreCorrect(
+        method: HTTPMethod,
+        expected: String
+    ) {
+        #expect(method.rawValue == expected)
     }
 }

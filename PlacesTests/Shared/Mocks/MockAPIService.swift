@@ -15,8 +15,7 @@ final class MockAPIService<Response: Decodable>: APIFetching, @unchecked Sendabl
     }
 
     func fetchData<T: Decodable>(
-        from endpoint: Endpoint,
-        as type: T.Type
+        from endpoint: NetworkEndpoint
     ) async throws -> T {
         switch result {
         case .success(let response):

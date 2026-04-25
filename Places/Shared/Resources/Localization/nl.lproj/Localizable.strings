@@ -10,6 +10,7 @@
 
 "places.title" = "Plaatsen";
 "custom.location.title" = "Aangepaste locatie";
+"common.ok" = "OK";
 
 // MARK: - Locations
 
@@ -36,7 +37,6 @@
 
 "wikipedia.not.installed.title" = "Wikipedia is not installed";
 "wikipedia.not.installed.message" = "Please install the Wikipedia app to open nearby places.";
-"common.ok" = "OK";
 
 // MARK: - Accessibility
 

@@ -5,8 +5,6 @@
 //  Created by Mahyar on 24/04/2026.
 //
 
-import Foundation
-
 struct PlaceLocation: Identifiable, Decodable, Equatable, Sendable {
     let name: String?
     let latitude: Double

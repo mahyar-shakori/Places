@@ -17,7 +17,7 @@ struct AppRootView: View {
             )
             .tabItem {
                 Label(
-                    L10n.Common.placesTitle,
+                    Localization.Common.placesTitle,
                     systemImage: Style.Icon.placesTab
                 )
             }
@@ -27,7 +27,7 @@ struct AppRootView: View {
             )
             .tabItem {
                 Label(
-                    L10n.Common.customLocationTitle,
+                    Localization.Common.customLocationTitle,
                     systemImage: Style.Icon.customTab
                 )
             }

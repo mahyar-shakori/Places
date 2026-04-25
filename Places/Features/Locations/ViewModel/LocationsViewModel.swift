@@ -29,15 +29,14 @@ final class LocationsViewModel {
         }
 
         do {
-            let response = try await apiService.fetchData(
-                from: LocationsEndpoint.locations,
-                as: LocationsResponse.self
+            let response: LocationsResponse = try await apiService.fetchData(
+                from: LocationsEndpoint.locations
             )
             locations = response.locations
         } catch let error as LocalizedError {
             errorMessage = error.errorDescription
         } catch {
-            errorMessage = L10n.NetworkError.invalidResponse
+            errorMessage = Localization.NetworkError.invalidResponse
         }
     }
 }

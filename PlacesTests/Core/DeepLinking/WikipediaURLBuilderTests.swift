@@ -12,23 +12,20 @@ import Testing
 @MainActor
 struct WikipediaURLBuilderTests {
 
-    @Test
-    func makeURLCreatesExpectedWikipediaURL() {
+    @Test(arguments: [
+        (52.3676, 4.9041, "wikipedia://places?lat=52.3676&long=4.9041"),
+        (-33.8688, -151.2093, "wikipedia://places?lat=-33.8688&long=-151.2093")
+    ])
+    func makeURLCreatesExpectedWikipediaURL(
+        latitude: Double,
+        longitude: Double,
+        expectedURL: String
+    ) {
         let url = WikipediaURLBuilder.makeURL(
-            latitude: 52.3676,
-            longitude: 4.9041
+            latitude: latitude,
+            longitude: longitude
         )
-
-        #expect(url?.absoluteString == "wikipedia://places?lat=52.3676&long=4.9041")
-    }
-
-    @Test
-    func makeURLHandlesNegativeCoordinates() {
-        let url = WikipediaURLBuilder.makeURL(
-            latitude: -33.8688,
-            longitude: -151.2093
-        )
-
-        #expect(url?.absoluteString == "wikipedia://places?lat=-33.8688&long=-151.2093")
+        
+        #expect(url?.absoluteString == expectedURL)
     }
 }

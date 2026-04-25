@@ -34,25 +34,25 @@ enum Style {
         static let body: CGFloat = 4
     }
 
-    enum Color {
-        static let screenBackground = SwiftUI.Color(.systemGroupedBackground)
-        static let cardBackground = SwiftUI.Color(.systemBackground)
+    enum Colors {
+        static let screenBackground = Color(.systemGroupedBackground)
+        static let cardBackground = Color(.systemBackground)
 
-        static let primaryAction = SwiftUI.Color.blue
-        static let disabledAction = SwiftUI.Color.gray.opacity(Style.Opacity.disabledContent)
+        static let primaryAction = Color.blue
+        static let disabledAction = Color.gray.opacity(Style.Opacity.disabledContent)
 
-        static let fieldBackground = SwiftUI.Color(.tertiarySystemBackground)
-        static let fieldBorder = SwiftUI.Color.gray.opacity(Style.Opacity.subtleBorder)
+        static let fieldBackground = Color(.tertiarySystemBackground)
+        static let fieldBorder = Color.gray.opacity(Style.Opacity.subtleBorder)
     }
 
-    enum Font {
-        static let sectionTitle = SwiftUI.Font.caption.weight(.bold)
-        static let fieldLabel = SwiftUI.Font.subheadline.weight(.semibold)
-        static let fieldValue = SwiftUI.Font.title3.weight(.semibold)
-        static let rowTitle = SwiftUI.Font.body.weight(.medium)
-        static let rowSubtitle = SwiftUI.Font.caption
-        static let buttonTitle = SwiftUI.Font.headline
-        static let body = SwiftUI.Font.body
+    enum Fonts {
+        static let sectionTitle = Font.caption.weight(.bold)
+        static let fieldLabel = Font.subheadline.weight(.semibold)
+        static let fieldValue = Font.title3.weight(.semibold)
+        static let rowTitle = Font.body.weight(.medium)
+        static let rowSubtitle = Font.caption
+        static let buttonTitle = Font.headline
+        static let body = Font.body
     }
 
     enum Icon {

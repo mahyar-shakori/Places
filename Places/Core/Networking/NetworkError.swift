@@ -16,13 +16,13 @@ enum NetworkError: Error, LocalizedError, Equatable, Sendable {
     var errorDescription: String? {
         switch self {
         case .invalidURL:
-            return  L10n.NetworkError.invalidURL
+            return  Localization.NetworkError.invalidURL
         case .invalidResponse:
-            return L10n.NetworkError.invalidResponse
-        case .unacceptableStatusCode:
-            return L10n.NetworkError.unacceptableStatusCode
+            return Localization.NetworkError.invalidResponse
+        case .unacceptableStatusCode(let code):
+            return "\(Localization.NetworkError.unacceptableStatusCode) (\(code))"
         case .decodingFailed:
-            return L10n.NetworkError.decodingFailed
+            return Localization.NetworkError.decodingFailed
         }
     }
 }

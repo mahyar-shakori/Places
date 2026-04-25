@@ -8,13 +8,16 @@
 import SwiftUI
 
 extension View {
-    func wikipediaNotInstalledAlert(
-        isPresented: Binding<Bool>
+    func basicAlert(
+        isPresented: Binding<Bool>,
+        title: String = Localization.Wikipedia.notInstalledTitle,
+        message: String = Localization.Wikipedia.notInstalledMessage,
+        buttonTitle: String = Localization.Common.okButton
     ) -> some View {
-        alert(L10n.Wikipedia.notInstalledTitle, isPresented: isPresented) {
-            Button(L10n.Wikipedia.okButton, role: .cancel) { }
+        alert(title, isPresented: isPresented) {
+            Button(buttonTitle, role: .cancel) { }
         } message: {
-            Text(L10n.Wikipedia.notInstalledMessage)
+            Text(message)
         }
     }
 }

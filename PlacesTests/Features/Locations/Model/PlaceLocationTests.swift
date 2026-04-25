@@ -14,13 +14,13 @@ struct PlaceLocationTests {
     
     @Test
     func decodesFromJSONCorrectly() throws {
-        let json = """
+        let json = try #require("""
         {
             "name": "Amsterdam",
             "lat": 52.3547,
             "long": 4.8339
         }
-        """.data(using: .utf8)!
+        """.data(using: .utf8))
         
         let location = try JSONDecoder().decode(PlaceLocation.self, from: json)
         
@@ -31,12 +31,12 @@ struct PlaceLocationTests {
     
     @Test
     func decodesWithoutName() throws {
-        let json = """
+        let json = try #require("""
         {
             "lat": 40.0,
             "long": -3.0
         }
-        """.data(using: .utf8)!
+        """.data(using: .utf8))
         
         let location = try JSONDecoder().decode(PlaceLocation.self, from: json)
         

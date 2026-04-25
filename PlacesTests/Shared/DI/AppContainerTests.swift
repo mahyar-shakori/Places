@@ -9,7 +9,7 @@ import Testing
 @testable import Places
 
 @MainActor
-struct AppContainerTests: @unchecked Sendable {
+struct AppContainerTests {
 
     @Test
     func appContainerCreatesDefaultDependencies() {
@@ -23,7 +23,6 @@ struct AppContainerTests: @unchecked Sendable {
         let mockAPIService = MockAPIService<LocationsResponse>(
             result: .success(LocationsTestData.response)
         )
-
         let container = AppContainer(apiService: mockAPIService)
         let viewModel = container.makeLocationsViewModel()
 
@@ -33,5 +32,15 @@ struct AppContainerTests: @unchecked Sendable {
         #expect(viewModel.locations == LocationsTestData.response.locations)
         #expect(viewModel.errorMessage == nil)
         #expect(viewModel.isLoading == false)
+    }
+
+    @Test
+    func makeCustomLocationViewModelCreatesViewModel() {
+        let container = AppContainer()
+
+        let viewModel = container.makeCustomLocationViewModel()
+
+        #expect(viewModel.isValidCoordinate == false)
+        #expect(viewModel.openWikipediaURL == nil)
     }
 }
