@@ -7,14 +7,17 @@
 
 @testable import Places
 
-final class MockAPIService<Response: Decodable & Sendable>: APIFetching, @unchecked Sendable {
+final class MockAPIService<Response: Decodable>: APIFetching, @unchecked Sendable {
     private let result: Result<Response, NetworkError>
 
     init(result: Result<Response, NetworkError>) {
         self.result = result
     }
 
-    func fetchData<T: Decodable>(from endpoint: Endpoint) async throws -> T {
+    func fetchData<T: Decodable>(
+        from endpoint: Endpoint,
+        as type: T.Type
+    ) async throws -> T {
         switch result {
         case .success(let response):
             guard let typedResponse = response as? T else {

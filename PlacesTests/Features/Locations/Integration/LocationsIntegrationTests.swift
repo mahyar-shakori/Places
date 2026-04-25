@@ -8,16 +8,17 @@
 import Testing
 @testable import Places
 
+@MainActor
 struct LocationsIntegrationTests {
 
     @Test(.disabled("Relies on external network"))
     func fetchLocationsFromRemoteAPI() async throws {
-        let service = await LocationsService(
-            apiService: APIService()
+        let apiService = APIService()
+
+        let response = try await apiService.fetchData(
+            from: LocationsEndpoint.locations,
+            as: LocationsResponse.self
         )
-
-        let locations = try await service.fetchLocations()
-
-        #expect(locations.isNotEmpty)
+        #expect(response.locations.isNotEmpty)
     }
 }

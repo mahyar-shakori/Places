@@ -5,37 +5,6 @@
 //  Created by Mahyar on 24/04/2026.
 //
 
-//import Foundation
-//
-//enum L10n {
-//    enum Common {
-//        static var placesTitle: String { "places.title".localized }
-//        static var customLocationTitle: String { "custom.location.title".localized }
-//    }
-//
-//    enum Locations {
-//        static var unknownTitle: String { "locations.unknown.title".localized }
-//        static var errorTitle: String { "locations.error.title".localized }
-//    }
-//
-//    enum CustomLocation {
-//        static var enterCoordinates: String { "custom.enter.coordinates".localized }
-//        static var latitudePlaceholder: String { "custom.latitude.placeholder".localized }
-//        static var longitudePlaceholder: String { "custom.longitude.placeholder".localized }
-//        static var openWikipedia: String { "custom.open.wikipedia".localized }
-//        static var howItWorksTitle: String { "custom.how.it.works.title".localized }
-//        static var description: String { "custom.description".localized }
-//    }
-//
-//    enum NetworkError {
-//        nonisolated static var invalidURL: String { "invalid.url".localized }
-//        nonisolated static var invalidResponse: String { "invalid.response".localized }
-//        nonisolated static var unacceptableStatusCode: String { "unacceptable.status.code".localized }
-//        nonisolated static var decodingFailed: String { "decoding.failed".localized }
-//    }
-//}
-
-
 import Foundation
 
 enum L10n {

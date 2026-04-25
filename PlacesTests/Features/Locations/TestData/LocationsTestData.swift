@@ -20,10 +20,12 @@ enum LocationsTestData: @unchecked Sendable {
         longitude: -3.7495758
     )
 
-    static let response = LocationsService.Response(
-        locations: [
-            amsterdam,
-            madridWithoutName
-        ]
+    static let locations = [
+        amsterdam,
+        madridWithoutName
+    ]
+
+    static let response = LocationsResponse(
+        locations: locations
     )
 }

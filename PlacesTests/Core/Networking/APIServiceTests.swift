@@ -9,6 +9,7 @@ import Foundation
 import Testing
 @testable import Places
 
+@MainActor
 @Suite(.serialized)
 struct APIServiceTests {
 
@@ -34,7 +35,8 @@ struct APIServiceTests {
         let service = APIService(urlSession: makeMockURLSession())
 
         let location: PlaceLocation = try await service.fetchData(
-            from: TestEndpoint()
+            from: TestEndpoint(),
+            as: PlaceLocation.self
         )
 
         #expect(location.name == "Amsterdam")
@@ -57,7 +59,8 @@ struct APIServiceTests {
 
         do {
             let _: PlaceLocation = try await service.fetchData(
-                from: TestEndpoint()
+                from: TestEndpoint(),
+                as: PlaceLocation.self
             )
             Issue.record("Expected fetchData to throw.")
         } catch let error as NetworkError {
@@ -88,13 +91,42 @@ struct APIServiceTests {
 
         do {
             let _: PlaceLocation = try await service.fetchData(
-                from: TestEndpoint()
+                from: TestEndpoint(),
+                as: PlaceLocation.self
             )
             Issue.record("Expected fetchData to throw.")
         } catch let error as NetworkError {
             #expect(error == .decodingFailed)
         } catch {
             Issue.record("Expected NetworkError.decodingFailed, got \(error).")
+        }
+    }
+    
+    @Test
+    func fetchDataThrowsInvalidResponseWhenResponseIsNotHTTPURLResponse() async {
+        MockURLProtocol.setHandler { _ in
+            let response = URLResponse(
+                url: URL(string: "https://example.com/location")!,
+                mimeType: nil,
+                expectedContentLength: 0,
+                textEncodingName: nil
+            )
+
+            return (response, Data())
+        }
+
+        let service = APIService(urlSession: makeMockURLSession())
+
+        do {
+            let _: PlaceLocation = try await service.fetchData(
+                from: TestEndpoint(),
+                as: PlaceLocation.self
+            )
+            Issue.record("Expected fetchData to throw.")
+        } catch let error as NetworkError {
+            #expect(error == .invalidResponse)
+        } catch {
+            Issue.record("Expected NetworkError.invalidResponse, got \(error).")
         }
     }
 }

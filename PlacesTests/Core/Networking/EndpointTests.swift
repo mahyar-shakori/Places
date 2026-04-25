@@ -9,6 +9,7 @@ import Foundation
 import Testing
 @testable import Places
 
+@MainActor
 struct EndpointTests {
 
     @Test
