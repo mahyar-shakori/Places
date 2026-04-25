@@ -1,0 +1,13 @@
+# Xcode build
+DerivedData/
+build/
+
+# User settings
+xcuserdata/
+*.xcuserstate
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
