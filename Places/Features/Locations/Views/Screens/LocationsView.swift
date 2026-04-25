@@ -58,7 +58,9 @@ private extension LocationsView {
 
 private extension LocationsView {
     func openWikipedia(url: URL?) {
-        guard let url else { return }
+        guard let url else {
+            return
+        }
 
         openURL(url) { accepted in
             showsWikipediaAlert = accepted.not

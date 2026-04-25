@@ -29,8 +29,9 @@ final class LocationsViewModel {
         }
 
         do {
+            let request = try LocationsEndpoint.locations.asURLRequest()
             let response: LocationsResponse = try await apiService.fetchData(
-                from: LocationsEndpoint.locations
+                from: request
             )
             locations = response.locations
         } catch let error as LocalizedError {

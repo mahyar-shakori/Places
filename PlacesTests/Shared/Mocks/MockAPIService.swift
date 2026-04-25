@@ -5,6 +5,7 @@
 //  Created by Mahyar on 24/04/2026.
 //
 
+import Foundation
 @testable import Places
 
 final class MockAPIService<Response: Decodable>: APIFetching, @unchecked Sendable {
@@ -15,7 +16,7 @@ final class MockAPIService<Response: Decodable>: APIFetching, @unchecked Sendabl
     }
 
     func fetchData<T: Decodable>(
-        from endpoint: NetworkEndpoint
+        from request: URLRequest
     ) async throws -> T {
         switch result {
         case .success(let response):

@@ -5,7 +5,7 @@
 //  Created by Mahyar on 24/04/2026.
 //
 
-final class AppContainer: Sendable {
+final class AppContainer {
     let apiService: APIFetching
 
     init(apiService: APIFetching = APIService()) {

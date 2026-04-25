@@ -7,11 +7,11 @@
 
 import Foundation
 
-final class MockURLProtocol: URLProtocol {
+final class MockURLProtocol: URLProtocol, @unchecked Sendable {
     private static let storage = Storage()
 
     static func setHandler(
-        _ handler: @escaping (URLRequest) throws -> (URLResponse, Data)
+        _ handler: @escaping @Sendable (URLRequest) throws -> (URLResponse, Data)
     ) {
         storage.handler = handler
     }
@@ -53,9 +53,9 @@ final class MockURLProtocol: URLProtocol {
 
 private final class Storage: @unchecked Sendable {
     private let lock = NSLock()
-    private var handlerValue: ((URLRequest) throws -> (URLResponse, Data))?
+    private var handlerValue: (@Sendable (URLRequest) throws -> (URLResponse, Data))?
 
-    var handler: ((URLRequest) throws -> (URLResponse, Data))? {
+    var handler: (@Sendable (URLRequest) throws -> (URLResponse, Data))? {
         get {
             lock.lock()
             defer { lock.unlock() }

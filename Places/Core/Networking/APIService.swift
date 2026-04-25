@@ -20,9 +20,8 @@ final class APIService: APIFetching {
     }
 
     func fetchData<T: Decodable>(
-        from endpoint: NetworkEndpoint
+        from request: URLRequest
     ) async throws -> T {
-        let request = try endpoint.asURLRequest()
         let (data, response) = try await urlSession.data(for: request)
 
         guard let httpResponse = response as? HTTPURLResponse else {

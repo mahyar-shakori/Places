@@ -18,7 +18,9 @@ final class CustomLocationViewModel {
     }
 
     var openWikipediaURL: URL? {
-        guard let coordinate else { return nil }
+        guard let coordinate else {
+            return nil
+        }
 
         return WikipediaURLBuilder.makeURL(
             latitude: coordinate.latitude,

@@ -15,51 +15,48 @@ struct APIServiceTests {
 
     @Test
     func fetchDataDecodesResponseWhenRequestSucceeds() async throws {
-        MockURLProtocol.setHandler { request in
-            let data = try #require("""
-            {
-                "name": "Amsterdam",
-                "lat": 52.3547498,
-                "long": 4.8339215
-            }
-            """.data(using: .utf8))
+        let data = try #require("""
+        {
+            "name": "Amsterdam",
+            "lat": 52.3547,
+            "long": 4.8339
+        }
+        """.data(using: .utf8))
 
-            let response = try makeHTTPURLResponse(
-                for: request,
-                statusCode: 200
-            )
-            return (response, data)
+        MockURLProtocol.setHandler { _ in
+            (try makeHTTPResponse(statusCode: 200), data)
         }
 
-        let service = APIService(urlSession: makeMockURLSession())
+        let sut: APIFetching = APIService(
+            urlSession: makeMockURLSession()
+        )
 
-        let location: PlaceLocation = try await service.fetchData(
-            from: TestEndpoint()
+        let location: PlaceLocation = try await sut.fetchData(
+            from: try makeRequest()
         )
 
         #expect(location.name == "Amsterdam")
-        #expect(location.latitude == 52.3547498)
-        #expect(location.longitude == 4.8339215)
+        #expect(location.latitude == 52.3547)
+        #expect(location.longitude == 4.8339)
     }
 
     @Test(arguments: [300, 400, 404, 500])
     func fetchDataThrowsUnacceptableStatusCodeWhenStatusCodeIsNotSuccessful(
         statusCode: Int
-    ) async {
-        MockURLProtocol.setHandler { request in
-            let response = try makeHTTPURLResponse(
-                for: request,
-                statusCode: statusCode
-            )    
-            return (response, Data())
+    ) async throws {
+        MockURLProtocol.setHandler { _ in
+            (try makeHTTPResponse(statusCode: statusCode), Data())
         }
 
-        let service = APIService(urlSession: makeMockURLSession())
+        let sut: APIFetching = APIService(
+            urlSession: makeMockURLSession()
+        )
 
         do {
-            let _: PlaceLocation = try await service.fetchData(
-                from: TestEndpoint()
+            let _: PlaceLocation = try await sut.fetchData(
+                from: try makeRequest()
             )
+
             Issue.record("Expected fetchData to throw.")
         } catch let error as NetworkError {
             #expect(error == .unacceptableStatusCode(statusCode))
@@ -69,26 +66,24 @@ struct APIServiceTests {
     }
 
     @Test
-    func fetchDataThrowsDecodingFailedWhenJSONIsInvalid() async {
-        MockURLProtocol.setHandler { request in
-            let data = try #require("""
-            {
-                "invalid": true
-            }
-            """.data(using: .utf8))
+    func fetchDataThrowsDecodingFailedWhenJSONIsInvalid() async throws {
+        let data = try #require("""
+        {
+            "invalid": true
+        }
+        """.data(using: .utf8))
 
-            let response = try makeHTTPURLResponse(
-                for: request,
-                statusCode: 200
-            )
-            return (response, data)
+        MockURLProtocol.setHandler { _ in
+            (try makeHTTPResponse(statusCode: 200), data)
         }
 
-        let service = APIService(urlSession: makeMockURLSession())
+        let sut: APIFetching = APIService(
+            urlSession: makeMockURLSession()
+        )
 
         do {
-            let _: PlaceLocation = try await service.fetchData(
-                from: TestEndpoint()
+            let _: PlaceLocation = try await sut.fetchData(
+                from: try makeRequest()
             )
 
             Issue.record("Expected fetchData to throw.")
@@ -100,24 +95,25 @@ struct APIServiceTests {
     }
 
     @Test
-    func fetchDataThrowsInvalidResponseWhenResponseIsNotHTTPURLResponse() async {
+    func fetchDataThrowsInvalidResponseWhenResponseIsNotHTTPURLResponse() async throws {
         MockURLProtocol.setHandler { _ in
-            let url = try #require(URL(string: "https://example.com/location"))
-
             let response = URLResponse(
-                url: url,
+                url: try makeURL(),
                 mimeType: nil,
                 expectedContentLength: 0,
                 textEncodingName: nil
             )
+
             return (response, Data())
         }
 
-        let service = APIService(urlSession: makeMockURLSession())
+        let sut: APIFetching = APIService(
+            urlSession: makeMockURLSession()
+        )
 
         do {
-            let _: PlaceLocation = try await service.fetchData(
-                from: TestEndpoint()
+            let _: PlaceLocation = try await sut.fetchData(
+                from: try makeRequest()
             )
 
             Issue.record("Expected fetchData to throw.")
@@ -127,7 +123,32 @@ struct APIServiceTests {
             Issue.record("Expected NetworkError.invalidResponse, got \(error).")
         }
     }
+
+    @Test
+    func fetchDataPropagatesURLSessionError() async throws {
+        MockURLProtocol.setHandler { _ in
+            throw URLError(.notConnectedToInternet)
+        }
+
+        let sut: APIFetching = APIService(
+            urlSession: makeMockURLSession()
+        )
+
+        do {
+            let _: PlaceLocation = try await sut.fetchData(
+                from: try makeRequest()
+            )
+
+            Issue.record("Expected fetchData to throw.")
+        } catch let error as URLError {
+            #expect(error.code == .notConnectedToInternet)
+        } catch {
+            Issue.record("Expected URLError.notConnectedToInternet, got \(error).")
+        }
+    }
 }
+
+// MARK: - Helpers
 
 private func makeMockURLSession() -> URLSession {
     let configuration = URLSessionConfiguration.ephemeral
@@ -135,32 +156,23 @@ private func makeMockURLSession() -> URLSession {
     return URLSession(configuration: configuration)
 }
 
-private func makeHTTPURLResponse(
-    for request: URLRequest,
+private func makeURL() throws -> URL {
+    try #require(URL(string: "https://example.com/location"))
+}
+
+private func makeRequest() throws -> URLRequest {
+    URLRequest(url: try makeURL())
+}
+
+private func makeHTTPResponse(
     statusCode: Int
 ) throws -> HTTPURLResponse {
-    let url = try #require(request.url)
-
-    return try #require(
+    try #require(
         HTTPURLResponse(
-            url: url,
+            url: try makeURL(),
             statusCode: statusCode,
             httpVersion: nil,
             headerFields: nil
         )
     )
-}
-
-private struct TestEndpoint: NetworkEndpoint {
-    var baseURL: URL? {
-        URL(string: "https://example.com")
-    }
-
-    var path: String {
-        "location"
-    }
-
-    var method: HTTPMethod {
-        .get
-    }
 }

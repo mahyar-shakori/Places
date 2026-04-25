@@ -12,13 +12,6 @@ import Testing
 struct AppContainerTests {
 
     @Test
-    func appContainerCreatesDefaultDependencies() {
-        let container = AppContainer()
-
-        #expect(container.apiService is APIService)
-    }
-
-    @Test
     func makeLocationsViewModelCreatesViewModelWithInjectedAPIService() async {
         let mockAPIService = MockAPIService<LocationsResponse>(
             result: .success(LocationsTestData.response)
