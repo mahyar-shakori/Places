@@ -1,7 +1,7 @@
 # Places
 
 <p align="center">
-  <img src="Places/Assets.xcassets/AppIcon.appiconset/icon-ios-1024x1024.png" width="160" alt="Places App Icon">
+  <img src="Places/Shared/Resources/Assets.xcassets/AppIcon.appiconset/places_icon_abn_1.png" width="160" alt="Places App Icon">
 </p>
 
 <p align="center">
