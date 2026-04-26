@@ -18,7 +18,6 @@ struct CoordinateTextField: View {
         TextField(placeholder, text: $text)
             .keyboardType(.decimalPad)
             .focused(focus)
-            .accessibilityElement(children: .ignore)
             .accessibilityLabel(accessibilityLabel)
             .accessibilityHint(accessibilityHint)
     }

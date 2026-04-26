@@ -8,21 +8,21 @@
 import Foundation
 
 final class APIService: APIFetching {
-    private let urlSession: URLSession
+    private let session: HTTPSession
     private let decoder: JSONDecoder
 
     init(
-        urlSession: URLSession = .shared,
+        session: HTTPSession = URLSession.shared,
         decoder: JSONDecoder = JSONDecoder()
     ) {
-        self.urlSession = urlSession
+        self.session = session
         self.decoder = decoder
     }
 
     func fetchData<T: Decodable>(
         from request: URLRequest
     ) async throws -> T {
-        let (data, response) = try await urlSession.data(for: request)
+        let (data, response) = try await session.data(for: request)
 
         guard let httpResponse = response as? HTTPURLResponse else {
             throw NetworkError.invalidResponse
