@@ -42,13 +42,16 @@ struct LocationsViewModelTests {
     @Test
     func loadLocationsClearsPreviousErrorBeforeLoading() async {
         let apiService = MockAPIService<LocationsResponse>(
-            result: .success(LocationsTestData.response)
+            result: .failure(NetworkError.invalidResponse)
         )
         let viewModel = LocationsViewModel(apiService: apiService)
-        viewModel.errorMessage = "Previous error"
-
         await viewModel.loadLocations()
+        
+        #expect(viewModel.errorMessage != nil)
 
+        apiService.result = .success(LocationsTestData.response)
+        await viewModel.loadLocations()
+        
         #expect(viewModel.errorMessage == nil)
     }
 }

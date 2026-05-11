@@ -19,7 +19,7 @@ struct CustomLocationViewModelTests {
         viewModel.longitude = "4.9041"
 
         #expect(viewModel.isValidCoordinate == true)
-        #expect(viewModel.openWikipediaURL?.absoluteString == "wikipedia://places?lat=52.3676&long=4.9041")
+        #expect(viewModel.wikipediaURL?.absoluteString == "wikipedia://places?lat=52.3676&long=4.9041")
         #expect(viewModel.openWikipediaButtonAccessibilityHint == Localization.Accessibility.openWikipediaHint)
     }
 
@@ -39,7 +39,7 @@ struct CustomLocationViewModelTests {
         viewModel.longitude = longitude
 
         #expect(viewModel.isValidCoordinate == false)
-        #expect(viewModel.openWikipediaURL == nil)
+        #expect(viewModel.wikipediaURL == nil)
         #expect(viewModel.openWikipediaButtonAccessibilityHint == Localization.Accessibility.openWikipediaRequirementHint)
     }
 }

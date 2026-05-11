@@ -9,7 +9,7 @@ import Foundation
 @testable import Places
 
 final class MockAPIService<Response: Decodable>: APIFetching, @unchecked Sendable {
-    private let result: Result<Response, NetworkError>
+    var result: Result<Response, NetworkError>
 
     init(result: Result<Response, NetworkError>) {
         self.result = result

@@ -34,6 +34,6 @@ struct AppContainerTests {
         let viewModel = container.makeCustomLocationViewModel()
 
         #expect(viewModel.isValidCoordinate == false)
-        #expect(viewModel.openWikipediaURL == nil)
+        #expect(viewModel.wikipediaURL == nil)
     }
 }

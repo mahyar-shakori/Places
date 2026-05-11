@@ -22,7 +22,7 @@ struct LocationsView: View {
                 .navigationTitle(Localization.Common.placesTitle)
         }
         .task {
-            await viewModel.loadLocations()
+            await viewModel.loadLocationsIfNeeded()
         }
         .basicAlert(isPresented: $showsWikipediaAlert)
     }
@@ -71,7 +71,9 @@ private extension LocationsView {
 #Preview {
     LocationsView(
         viewModel: LocationsViewModel(
-            apiService: APIService()
+            repository: LocationsRepository(
+                apiService: APIService()
+            )
         )
     )
 }

@@ -59,7 +59,7 @@ private extension CustomLocationView {
             PrimaryButton(
                 isEnabled: viewModel.isValidCoordinate,
                 action: {
-                    openWikipedia(url: viewModel.openWikipediaURL)
+                    openWikipedia(url: viewModel.wikipediaURL)
                 }
             ) {
                 Label(

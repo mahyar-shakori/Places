@@ -17,7 +17,7 @@ final class CustomLocationViewModel {
         coordinate != nil
     }
 
-    var openWikipediaURL: URL? {
+    var wikipediaURL: URL? {
         guard let coordinate else {
             return nil
         }

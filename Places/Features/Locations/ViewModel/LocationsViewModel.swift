@@ -10,17 +10,23 @@ import Observation
 
 @Observable
 final class LocationsViewModel {
-    private let apiService: APIFetching
-
-    var locations: [PlaceLocation] = []
-    var isLoading = false
-    var errorMessage: String?
+    private let repository: LocationsRepositoryProtocol
+    private(set) var locations: [PlaceLocation] = []
+    private(set) var isLoading = false
+    private(set) var errorMessage: String?
     
-    init(apiService: APIFetching) {
-        self.apiService = apiService
+    init(repository: LocationsRepositoryProtocol) {
+        self.repository = repository
     }
     
-    func loadLocations() async {
+    func loadLocationsIfNeeded() async {
+        guard locations.isEmpty else {
+            return
+        }
+        await loadLocations()
+    }
+    
+    private func loadLocations() async {
         isLoading = true
         errorMessage = nil
 
@@ -29,11 +35,7 @@ final class LocationsViewModel {
         }
 
         do {
-            let request = try LocationsEndpoint.locations.asURLRequest()
-            let response: LocationsResponse = try await apiService.fetchData(
-                from: request
-            )
-            locations = response.locations
+            locations = try await repository.fetchLocations()
         } catch let error as LocalizedError {
             errorMessage = error.errorDescription
         } catch {

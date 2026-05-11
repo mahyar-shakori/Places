@@ -5,6 +5,9 @@
 //  Created by Mahyar on 24/04/2026.
 //
 
+import Foundation
+
+@Observable
 final class AppContainer {
     let apiService: APIFetching
 
@@ -13,7 +16,8 @@ final class AppContainer {
     }
 
     func makeLocationsViewModel() -> LocationsViewModel {
-        LocationsViewModel(apiService: apiService)
+        let repository = LocationsRepository(apiService: apiService)
+        return LocationsViewModel(repository: repository)
     }
 
     func makeCustomLocationViewModel() -> CustomLocationViewModel {

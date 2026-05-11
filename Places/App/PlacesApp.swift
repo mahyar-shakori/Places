@@ -13,7 +13,8 @@ struct PlacesApp: App {
 
     var body: some Scene {
         WindowGroup {
-            AppRootView(container: container)
+            AppRootView()
+                .environment(container)
         }
     }
 }

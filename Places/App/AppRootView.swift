@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AppRootView: View {
-    let container: AppContainer
+    @Environment(AppContainer.self) private var container
     
     var body: some View {
         TabView {
@@ -36,7 +36,6 @@ struct AppRootView: View {
 }
 
 #Preview {
-    AppRootView(
-        container: AppContainer()
-    )
+    AppRootView()
+        .environment(AppContainer())
 }
