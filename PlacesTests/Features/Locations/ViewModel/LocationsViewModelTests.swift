@@ -13,12 +13,13 @@ struct LocationsViewModelTests {
 
     @Test
     func loadLocationsSetsLocationsWhenAPISucceeds() async {
-        let apiService = MockAPIService<LocationsResponse>(
-            result: .success(LocationsTestData.response)
+        let repository = MockLocationsRepository(
+            result: .success(LocationsTestData.response.locations)
         )
-        let viewModel = LocationsViewModel(apiService: apiService)
 
-        await viewModel.loadLocations()
+        let viewModel = LocationsViewModel(repository: repository)
+
+        await viewModel.loadLocationsIfNeeded()
 
         #expect(viewModel.locations == LocationsTestData.response.locations)
         #expect(viewModel.errorMessage == nil)
@@ -27,12 +28,13 @@ struct LocationsViewModelTests {
 
     @Test
     func loadLocationsSetsErrorMessageWhenAPIFails() async {
-        let apiService = MockAPIService<LocationsResponse>(
-            result: .failure(.invalidResponse)
+        let repository = MockLocationsRepository(
+            result: .failure(NetworkError.invalidResponse)
         )
-        let viewModel = LocationsViewModel(apiService: apiService)
 
-        await viewModel.loadLocations()
+        let viewModel = LocationsViewModel(repository: repository)
+
+        await viewModel.loadLocationsIfNeeded()
 
         #expect(viewModel.locations.isEmpty == true)
         #expect(viewModel.errorMessage == NetworkError.invalidResponse.errorDescription)
@@ -41,17 +43,22 @@ struct LocationsViewModelTests {
 
     @Test
     func loadLocationsClearsPreviousErrorBeforeLoading() async {
-        let apiService = MockAPIService<LocationsResponse>(
+        let repository = MockLocationsRepository(
             result: .failure(NetworkError.invalidResponse)
         )
-        let viewModel = LocationsViewModel(apiService: apiService)
-        await viewModel.loadLocations()
-        
+
+        let viewModel = LocationsViewModel(repository: repository)
+
+        await viewModel.loadLocationsIfNeeded()
+
         #expect(viewModel.errorMessage != nil)
 
-        apiService.result = .success(LocationsTestData.response)
-        await viewModel.loadLocations()
-        
+        repository.result = .success(LocationsTestData.response.locations)
+
+        await viewModel.loadLocationsIfNeeded()
+
         #expect(viewModel.errorMessage == nil)
+        #expect(viewModel.locations == LocationsTestData.response.locations)
+        #expect(viewModel.isLoading == false)
     }
 }

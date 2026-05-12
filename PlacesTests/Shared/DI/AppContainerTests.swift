@@ -19,7 +19,7 @@ struct AppContainerTests {
         let container = AppContainer(apiService: mockAPIService)
         let viewModel = container.makeLocationsViewModel()
 
-        await viewModel.loadLocations()
+        await viewModel.loadLocationsIfNeeded()
 
         #expect(container.apiService is MockAPIService<LocationsResponse>)
         #expect(viewModel.locations == LocationsTestData.response.locations)
